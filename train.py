@@ -35,32 +35,24 @@ from pytorch_lightning.callbacks import ModelCheckpoint
 def main(cfg):
     pl.seed_everything(1235)
 
-    dataset = SceneDataset('/mnt/nvme_share/srt02/SceneTransformer/data') #路径设置
+    dataset = SceneDataset('HoopTransformer/data') #路径设置
     train_size = int(len(dataset) * 0.8)  # 80%作为训练集
     val_size = len(dataset) - train_size  # 剩余部分作为验证集
     train_dataset, val_dataset = random_split(dataset, [train_size, val_size])
 
-    train_dataloader = DataLoader(train_dataset, batch_size=cfg.DataLoader.batch_size, shuffle=True,num_workers=cfg.DataLoader.num_workers,collate_fn=create_batch_b2v,drop_last=True)
-    val_dataloader = DataLoader(val_dataset, batch_size=cfg.DataLoader.batch_size, shuffle=False,num_workers=cfg.DataLoader.num_workers,collate_fn=create_batch_b2v)
+    train_dataloader = DataLoader(train_dataset, batch_size=cfg.DataLoader.batch_size, shuffle=True,num_workers=cfg.DataLoader.num_workers,collate_fn=create_batch_C,drop_last=True) #collate_fn from collect.py, A MP; B MR;C MP+MR
+    val_dataloader = DataLoader(val_dataset, batch_size=cfg.DataLoader.batch_size, shuffle=False,num_workers=cfg.DataLoader.num_workers,collate_fn=create_batch_C)
     print(train_dataloader.batch_size)    
-   #set checkpoint
-    checkpoint_callback = ModelCheckpoint(
-        monitor='val/loss',
-        dirpath='to/checkpoints/1222_b2v',
-        filename='model-{epoch:02d}-{val_loss:.2f}',
-        save_top_k=3,
-        mode='min'
-    )
+  
 
     #train process
     os.environ["CUDA_VISIBLE_DEVICES"] = cfg.device_ids
     
-    #model = SceneTransformer(cfg.model.in_feature_dim, cfg.model.time_steps, cfg.model.feature_dim, cfg.model.head_num, cfg.model.k, cfg.model.F, cfg.model.halfwidth, cfg.model.lr) #input_dim,timestep,out_dim,headnum,k,F,halfwith,lr
-    model = Scene_b2v(cfg.model.in_feature_dim, cfg.model.time_steps, cfg.model.feature_dim, cfg.model.head_num, cfg.model.k, cfg.model.F, cfg.model.halfwidth, cfg.model.lr)
+    model = SceneTransformer(cfg.model.in_feature_dim, cfg.model.time_steps, cfg.model.feature_dim, cfg.model.head_num, cfg.model.k, cfg.model.F, cfg.model.halfwidth, cfg.model.lr) #input_dim,timestep,out_dim,headnum,k,F,halfwith,lr
     tb_logger = TensorBoardLogger("logs/", name= cfg.check_point_name)
     #tb_callback = TensorBoardCallback()
     
-    trainer = pl.Trainer(max_epochs=cfg.max_epochs,logger=tb_logger,callbacks=[checkpoint_callback])
+    trainer = pl.Trainer(max_epochs=cfg.max_epochs,logger=tb_logger)
     trainer.fit(model, train_dataloader, val_dataloader)
     
     trainer.save_checkpoint(cfg.save_path)
