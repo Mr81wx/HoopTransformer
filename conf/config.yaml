@@ -1,0 +1,22 @@
+model:
+  in_feature_dim: 3
+  feature_dim: 256
+  time_steps: 121
+  head_num: 4
+  k: 4
+  F: 6
+  halfwidth: 50
+  lr: 1e-5
+  
+DataLoader:
+  batch_size: 32
+  num_workers: 8
+  
+  
+device_ids: '0'
+device_num: 1
+max_epochs: 50
+
+check_point_name: 'mode1223b2v'
+save_path: "checkpoint/mp/mode1223b2v.ckpt"
+
