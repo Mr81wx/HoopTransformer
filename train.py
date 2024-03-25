@@ -35,7 +35,7 @@ from pytorch_lightning.callbacks import ModelCheckpoint
 def main(cfg):
     pl.seed_everything(1235)
 
-    dataset = SceneDataset('/mnt/nvme_share/srt02/SceneTransformer/data') #路径设置
+    dataset = SceneDataset('HoopTransformer/data') #路径设置
     train_size = int(len(dataset) * 0.8)  # 80%作为训练集
     val_size = len(dataset) - train_size  # 剩余部分作为验证集
     train_dataset, val_dataset = random_split(dataset, [train_size, val_size])
