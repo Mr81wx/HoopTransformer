@@ -3,6 +3,8 @@ Paper link https://link.springer.com/article/10.1007/s40279-024-02030-3
 
 Understanding and recognizing basketball offensive plays, which involve intricate interactions between players, have always been regarded as challenging tasks for untrained humans, not to mention machines. Inspired by the Large language Model like ChatGPT and BERT, We aim to train a pre-training model to automatically recognize offensive plays by proposing a novel self-supervised learning model for trajectory prediction. 
 
+https://github.com/user-attachments/assets/0e82a76c-60ca-4281-8b73-5aba5cd2298d
+
 Model Architecture:
 The model is based on the encoder-decoder architecture and employ combination of motion prediction and motion reconstruction for predicting players' high-velocity trajectory. Pre-training on more than 90,000+ offensive possessions.
 ![F1_00](https://github.com/user-attachments/assets/e36aa4ac-b322-4bcd-b575-6333da49fe4f)
@@ -13,7 +15,7 @@ Masking strategy：
 Results:
 ![F3_00](https://github.com/user-attachments/assets/e320edb2-849f-4157-9512-d63f5c8166df)
 
-https://github.com/user-attachments/assets/0e82a76c-60ca-4281-8b73-5aba5cd2298d
+
 
 
 #Data Sportvu 2015-16 
