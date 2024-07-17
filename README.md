@@ -3,6 +3,8 @@ Paper link https://link.springer.com/article/10.1007/s40279-024-02030-3
 
 Understanding and recognizing basketball offensive plays, which involve intricate interactions between players, have always been regarded as challenging tasks for untrained humans, not to mention machines. Inspired by the Large language Model like ChatGPT and BERT, We aim to train a pre-training model to automatically recognize offensive plays by proposing a novel self-supervised learning model for trajectory prediction. 
 
+Application:
+Based on the Encoder, we can genarate Possession Embedding for each possession (vector database), and use similarity search to find the possessions run same set play.
 https://github.com/user-attachments/assets/0e82a76c-60ca-4281-8b73-5aba5cd2298d
 
 Model Architecture:
