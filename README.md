@@ -5,6 +5,7 @@ Understanding and recognizing basketball offensive plays, which involve intricat
 
 Application:
 Based on the Encoder, we can genarate Possession Embedding for each possession (vector database), and use similarity search to find the possessions run same set play.
+
 https://github.com/user-attachments/assets/0e82a76c-60ca-4281-8b73-5aba5cd2298d
 
 Model Architecture:
